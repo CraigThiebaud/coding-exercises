@@ -15,7 +15,7 @@ namespace Testing.Tests
         [SetUp]
         protected override void SetUp()
         {
-
+            base.SetUp();
         }
 
         public void Because(string date)

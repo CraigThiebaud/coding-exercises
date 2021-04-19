@@ -14,7 +14,7 @@ namespace Testing.Tests
         [SetUp]
         protected virtual void SetUp()
         {
-
+            service = new MarsRoverService();
         }
     }
 }
