@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace NasaAPIService.Services
 {
@@ -16,10 +17,24 @@ namespace NasaAPIService.Services
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync(new Uri(uriString)).Result;
-                result = new RoverImages()
+
+                if (true)
                 {
-                    Images = new List<string>()
-                };
+                    var responseString = response.Content.ReadAsStringAsync().Result;
+                    JObject jResponse = JObject.Parse(responseString);
+                    var jList = jResponse["photos"].ToList();
+
+                    result = new RoverImages()
+                    {
+                        Images = new List<string>()
+                    };
+
+                    foreach (var photo in jList)
+                    {
+                        result.Images.Add(photo["img_src"].ToString());
+                    }
+                }
+                
             }
             return result;
         }
