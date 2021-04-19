@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs
+/mars-rover/RoverPhotosApp/.vs/RoverPhotosApp/v16
+/mars-rover/RoverPhotosApp/RoverPhotosApp/obj
+/mars-rover/RoverPhotosApp/.vs/RoverPhotosApp
+/mars-rover/RoverPhotosApp/NasaAPIService/obj
+/mars-rover/RoverPhotosApp/RoverPhotosApp/bin/Debug/netcoreapp3.1
+/mars-rover/RoverPhotosApp/Testing/obj
