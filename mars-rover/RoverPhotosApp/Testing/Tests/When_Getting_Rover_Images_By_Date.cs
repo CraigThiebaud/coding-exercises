@@ -29,13 +29,5 @@ namespace Testing.Tests
             Because("");
             Assert.IsInstanceOf<RoverImages>(result);
         }
-
-        [Test]
-        public void Should_Return_Expected_Results()
-        {
-            Because("");
-            Assert.AreEqual(4, result.Images.Count);
-            Assert.AreEqual("http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01004/opgs/edr/fcam/FLB_486615455EDR_F0481570FHAZ00323M_.JPG", result.Images.First().ToString());
-        }
     }
 }
