@@ -14,11 +14,12 @@ namespace NasaAPIService.Services
         {
             var uriString = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3&api_key=kKh7bH8p42hBOtScs9upsNirlKGtRGQJ9LkDqz4m";
             RoverImages result;
+            
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync(new Uri(uriString)).Result;
 
-                if (true)
+                if (response.IsSuccessStatusCode)
                 {
                     var responseString = response.Content.ReadAsStringAsync().Result;
                     JObject jResponse = JObject.Parse(responseString);
@@ -33,6 +34,10 @@ namespace NasaAPIService.Services
                     {
                         result.Images.Add(photo["img_src"].ToString());
                     }
+                }
+                else
+                {
+                    throw new NotImplementedException();
                 }
                 
             }

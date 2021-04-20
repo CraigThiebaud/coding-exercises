@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NasaAPIService", "NasaAPISe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing", "Testing\Testing.csproj", "{AC30DC26-32C8-4969-9DDF-1B34B008FDDA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoverPhotosApp", "RoverPhotosApp\RoverPhotosApp.csproj", "{1466F339-3960-4716-8F21-EBA42C8875CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AC30DC26-32C8-4969-9DDF-1B34B008FDDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC30DC26-32C8-4969-9DDF-1B34B008FDDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC30DC26-32C8-4969-9DDF-1B34B008FDDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1466F339-3960-4716-8F21-EBA42C8875CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1466F339-3960-4716-8F21-EBA42C8875CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1466F339-3960-4716-8F21-EBA42C8875CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1466F339-3960-4716-8F21-EBA42C8875CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
