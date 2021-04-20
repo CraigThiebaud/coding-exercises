@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "lmBcaDbBI4oXQRtV75PFIY+0hM+Q2XSB2ncUR67aOfkNzXy0sV9ViyxB094aVCLRQHUrQBZM3EnvPd0EFs42nA==",
+  "dgSpecHash": "LbagRNr2X9D0vmv/bB+uPSTnYJ+jiA5CgsWARcLShaoGc9T/gsmm6oUde1cPGPMuTSq4KaXqC0ECRMfBeuNScQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\craig\\source\\repos\\coding-exercises\\mars-rover\\RoverPhotos\\RoverPhotosApp\\RoverPhotosApp.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\craig\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
   "logs": []
 }
