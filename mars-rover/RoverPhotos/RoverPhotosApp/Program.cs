@@ -14,9 +14,16 @@ namespace RoverPhotosApp
             var roverService = new MarsRoverService();
             foreach(var line in lines)
             {
-                roverService.GetRoverImagesByDate(line);
+                try
+                {
+                    var result = roverService.GetRoverImagesByDate(line);
+                    Console.WriteLine(result);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
-            Console.WriteLine("here");
         }
     }
 }

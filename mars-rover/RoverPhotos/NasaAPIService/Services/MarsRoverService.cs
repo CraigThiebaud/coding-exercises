@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 namespace NasaAPIService.Services
 {
@@ -12,11 +13,13 @@ namespace NasaAPIService.Services
     {
         public RoverImages GetRoverImagesByDate(string date)
         {
-            var uriString = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3&api_key=kKh7bH8p42hBOtScs9upsNirlKGtRGQJ9LkDqz4m";
             RoverImages result;
-            
+            string dateString;
+            dateString = DateTime.Parse(date).ToString("yyyy-MM-dd");
+
             using (var client = new HttpClient())
             {
+                var uriString = $"https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={dateString}&api_key=kKh7bH8p42hBOtScs9upsNirlKGtRGQJ9LkDqz4m";
                 var response = client.GetAsync(new Uri(uriString)).Result;
 
                 if (response.IsSuccessStatusCode)
@@ -34,14 +37,13 @@ namespace NasaAPIService.Services
                     {
                         result.Images.Add(photo["img_src"].ToString());
                     }
+                    return result;
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    throw new Exception("NASA API call failed.");
                 }
-                
             }
-            return result;
         }
     }
 }
