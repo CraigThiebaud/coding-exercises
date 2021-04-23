@@ -1,7 +1,7 @@
 ﻿import React, { Component, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Button } from 'reactstrap';
+import ImagePagination from 'react-image-pagination';
 
 
 
@@ -10,30 +10,54 @@ export class RoverImages extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { images: [], loading: true };
+        this.state = { images: [], loading: true, startDate: new Date() };
+        this.setSelectedDate = this.setSelectedDate.bind(this);
+        this.submit = this.submit.bind(this);
+        this.setPages = this.setPages.bind(this);
     };
 
-    static Date = () => {
-        const [date, setDate] = useState(new Date());
-        return (
-            <DatePicker selected={date} onChange={newDate => setDate(newDate)} />
-        );
-    };
+    setSelectedDate(date) {
+        this.setState({
+            startDate: date
+        })
+    }
+
+    async submit() {
+        var x = this.state.startDate.toDateString();
+        const response = await fetch(`roverimage?date=${x}`);
+        const data = await response.json();
+        this.setState({ images: data, loading: false });
+    }
 
     render() {
         return (
             <div>
-                <div>
-                    {this.Date}
+                <div className="App">
+                    <header className="App-header">
+                        <ImagePagination
+                            pages={ this.setPages(this.state.images) }
+                            dotDisplay={true}
+                        />
+                    </header>
                 </div>
-                <div style={{ paddingTop: 5 }}>
-                    <Button onClick={ this.getImagesByDate() }>Submit</Button>
+                <div>
+                    <div>
+                        <DatePicker
+                            selected={this.state.startDate}
+                            onChange={this.setSelectedDate}
+                            name="startDate"
+                            dateFormat="MM/dd/yyyy"
+                        />
+                        <button className="btn btn-primary" onClick={ this.submit }>Get Images</button>
+                    </div>
                 </div>
             </div>
         );
     }
 
-    async getImagesByDate() {
-
+    setPages(images) {
+        var pages = [];
+        images.forEach(x => pages.push({ src: x }))
+        return pages;
     }
 }

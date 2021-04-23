@@ -9,7 +9,7 @@ using System.Globalization;
 
 namespace NasaAPIService.Services
 {
-    public class MarsRoverService
+    public class MarsRoverService : IMarsRoverService
     {
         public RoverImages GetRoverImagesByDate(string date)
         {
