@@ -8,6 +8,6 @@ namespace NasaAPIService.Services
 {
     public interface IMarsRoverService
     {
-        public RoverImages GetRoverImagesByDate(string date);
+        public Task<RoverImages> GetRoverImagesByDateAsync(string date);
     }
 }

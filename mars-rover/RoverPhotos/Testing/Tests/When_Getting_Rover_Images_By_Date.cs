@@ -18,22 +18,22 @@ namespace Testing.Tests
             base.SetUp();
         }
 
-        public void Because(string date)
+        public async Task BecauseAsync(string date)
         {
-            result =  service.GetRoverImagesByDate(date);
+            result =  await service.GetRoverImagesByDateAsync(date);
         }
 
         [Test]
-        public void Should_Return_Rover_Images_Model()
+        public async Task Should_Return_Rover_Images_Model_Async()
         {
-            Because("Jul-13-2016");
+            await BecauseAsync("Jul-13-2016");
             Assert.IsInstanceOf<RoverImages>(result);
         }
 
         [Test]
-        public void Should_Return_Expected_Results()
+        public async Task Should_Return_Expected_Results_Async()
         {
-            Because("2015-6-3");
+            await BecauseAsync("2015-6-3");
             Assert.AreEqual(4, result.Images.Count);
             Assert.AreEqual("http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01004/opgs/edr/fcam/FLB_486615455EDR_F0481570FHAZ00323M_.JPG", result.Images.First().ToString());
         }

@@ -11,39 +11,47 @@ namespace NasaAPIService.Services
 {
     public class MarsRoverService : IMarsRoverService
     {
-        public RoverImages GetRoverImagesByDate(string date)
+        public async Task<RoverImages> GetRoverImagesByDateAsync(string date)
         {
             RoverImages result;
-            string dateString;
-            dateString = DateTime.Parse(date).ToString("yyyy-MM-dd");
-
-            using (var client = new HttpClient())
+            DateTime parsedDate;
+            var isValid = DateTime.TryParse(date, out parsedDate);
+            var dateString = isValid ? parsedDate.ToString("yyyy-MM-dd") : null;
+            if (isValid)
             {
-                var uriString = $"https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={dateString}&api_key=kKh7bH8p42hBOtScs9upsNirlKGtRGQJ9LkDqz4m";
-                var response = client.GetAsync(new Uri(uriString)).Result;
-
-                if (response.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
-                    var responseString = response.Content.ReadAsStringAsync().Result;
-                    JObject jResponse = JObject.Parse(responseString);
-                    var jList = jResponse["photos"].ToList();
+                    var uriString = $"https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={dateString}&api_key=kKh7bH8p42hBOtScs9upsNirlKGtRGQJ9LkDqz4m";
+                    var response = await client.GetAsync(new Uri(uriString));
 
-                    result = new RoverImages()
+                    if (response.IsSuccessStatusCode)
                     {
-                        Images = new List<string>()
-                    };
+                        var responseString = await response.Content.ReadAsStringAsync();
+                        JObject jResponse = JObject.Parse(responseString);
+                        var jList = jResponse["photos"].ToList();
 
-                    foreach (var photo in jList)
-                    {
-                        result.Images.Add(photo["img_src"].ToString());
+                        result = new RoverImages()
+                        {
+                            Images = new List<string>()
+                        };
+
+                        foreach (var photo in jList)
+                        {
+                            result.Images.Add(photo["img_src"].ToString());
+                        }
+                        return result;
                     }
-                    return result;
-                }
-                else
-                {
-                    throw new Exception("NASA API call failed.");
+                    else
+                    {
+                        throw new Exception("NASA API call failed.");
+                    }
                 }
             }
+            else
+            {
+                throw new Exception("Date invalid.");
+            }
+            
         }
     }
 }

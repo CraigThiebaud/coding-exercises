@@ -19,7 +19,7 @@ namespace Testing.Tests.Controllers
         {
             base.SetUp();
 
-            service.Setup(x => x.GetRoverImagesByDate(It.IsAny<string>())).Returns(new RoverImages() 
+            service.Setup(x => x.GetRoverImagesByDateAsync(It.IsAny<string>())).ReturnsAsync(new RoverImages() 
             {
                 Images = new List<string>() { expectedResult }
             });
@@ -27,22 +27,22 @@ namespace Testing.Tests.Controllers
             controller = new RoverImageController(service.Object);
         }
 
-        void Because(string date)
+        async void BecauseAsync(string date)
         {
-            result = controller.Get("test").ToList();
+            result = (await controller.GetAsync("test")).ToList();
         }
 
         [Test]
         public void Should_return_list_of_strings()
         {
-            Because("test");
+            BecauseAsync("test");
             Assert.IsInstanceOf<List<string>>(result);
         }
 
         [Test]
         public void Should_return_expected_result()
         {
-            Because("test");
+            BecauseAsync("test");
             Assert.AreEqual(expectedResult, result.First());
         }
     }

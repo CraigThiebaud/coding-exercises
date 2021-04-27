@@ -21,7 +21,7 @@ namespace RoverPhotosApp
             {
                 try
                 {
-                    var result = roverService.GetRoverImagesByDate(line);
+                    var result = roverService.GetRoverImagesByDateAsync(line).Result;
                     DownloadImages(result.Images);
                     Console.WriteLine($"Total images on {line}: {result.Images.Count}");
                 }
@@ -34,9 +34,9 @@ namespace RoverPhotosApp
 
         public static void DownloadImages(List<string> imageUrls)
         {
+            var webClient = new WebClient();
             foreach (var url in imageUrls)
             {
-                var webClient = new WebClient();
                 webClient.DownloadFile(url, "C:\\MarsPhotos\\" + url.Split('/').Last());
             }
         }

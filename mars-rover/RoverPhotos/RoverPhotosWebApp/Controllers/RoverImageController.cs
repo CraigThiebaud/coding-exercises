@@ -19,9 +19,9 @@ namespace RoverPhotosWebApp.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<string> Get(string date)
+        public async Task<IEnumerable<string>> GetAsync(string date)
         {
-            return roverService.GetRoverImagesByDate(date).Images;
+            return (await roverService.GetRoverImagesByDateAsync(date)).Images;
         }
     }
 }
